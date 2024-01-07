@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  frontend:
+    image: stack-nextjs-image
+    container_name: host-stack-frontend
+    build:
+      context: ./frontend
+      dockerfile: ../provision/frontend/Dockerfile
+    ports:
+      - ${NEXT_PUBLIC_APP_PORT}:3000
+    stdin_open: true
+    tty: true
+    env_file:
+      - .env
+    networks:
+      - main
+    volumes:
+      - ./frontend:/home/app
+
+  backend:
+    image: stack-nestjs-image
+    container_name: host-stack-backend
+    build:
+      context: ./backend
+      dockerfile: ../provision/backend/Dockerfile
+    ports:
+      - ${NEST_PORT}:${NEST_PORT}
+    stdin_open: true
+    tty: true
+    env_file:
+      - .env
+    networks:
+      - main
+    volumes:
+      - ./backend:/var/www/stack
+
+
+networks:
+  main:
+    driver: bridge
