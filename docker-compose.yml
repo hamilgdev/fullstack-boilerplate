@@ -6,7 +6,7 @@ services:
     container_name: host-stack-frontend
     build:
       context: ./frontend
-      dockerfile: ../provision/frontend/Dockerfile
+      dockerfile: ../provision/frontend/development/Dockerfile
     ports:
       - ${NEXT_PUBLIC_APP_PORT}:3000
     stdin_open: true
@@ -23,7 +23,7 @@ services:
     container_name: host-stack-backend
     build:
       context: ./backend
-      dockerfile: ../provision/backend/Dockerfile
+      dockerfile: ../provision/backend/development/Dockerfile
     ports:
       - ${NEST_PORT}:${NEST_PORT}
     stdin_open: true
