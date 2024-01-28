@@ -1,6 +1,6 @@
 # Fullstack Boilerplate
 
-A boilerplate for fullstack applications with **NextJS** and **NestJS**.
+A boilerplate for fullstack applications with **NextJS**, **NestJS** and, **PostgreSQL**.
 
 ## 📜 System Requirement
 
@@ -8,7 +8,6 @@ A boilerplate for fullstack applications with **NextJS** and **NestJS**.
 - Nextjs `14.0.4` or later [👉 Install Next](https://nextjs.org/docs/getting-started)
 - Nestjs `10.0.0` or later [👉 Install Nest](https://docs.nestjs.com/)
 - NPM [👉 Install npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- [Nestjs](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ### Visual Studio Code
 
@@ -58,6 +57,12 @@ Or you can run the **backend** container with one command
 
 ```bash
   make backend.start
+```
+
+Also you can run the **database** container with one command
+
+```bash
+  make database.start
 ```
 
 Run tests

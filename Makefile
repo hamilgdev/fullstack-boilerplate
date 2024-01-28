@@ -38,3 +38,13 @@ backend.test:
 
 backend.test.watch:
 	cd backend && npm run test:watch
+
+
+# -------------------------DATABASE-------------------------
+
+database.start:
+	docker compose run --rm --name host-stack-database \
+	--no-deps --service-ports database ; docker compose down database
+
+database.stop:
+	docker compose stop database
