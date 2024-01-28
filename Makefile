@@ -1,4 +1,7 @@
-# -------------------------APP-------------------------
+# -------------------------🧩 APP-------------------------
+
+app.init:
+	cd frontend && npm install && cd ../backend && npm install
 
 app.build_dev:
 	docker compose build --no-cache ; docker compose down
@@ -9,7 +12,10 @@ app.start_dev:
 app.stop_dev:
 	docker compose down
 
-# -------------------------FRONTEND-------------------------
+# -------------------------🔖 FRONTEND-------------------------
+
+frontend.init:
+	cd frontend && npm install
 
 frontend.build:
 	docker compose build --no-cache frontend
@@ -21,7 +27,10 @@ frontend.start:
 frontend.stop:
 	docker compose stop frontend
 
-# -------------------------BACKEND-------------------------
+# -------------------------🗂️ BACKEND-------------------------
+
+backend.init:
+	cd backend && npm install
 
 backend.build:
 	docker compose build --no-cache backend
@@ -40,7 +49,7 @@ backend.test.watch:
 	cd backend && npm run test:watch
 
 
-# -------------------------DATABASE-------------------------
+# -------------------------🗄️ DATABASE-------------------------
 
 database.start:
 	docker compose run --rm --name host-stack-database \
@@ -48,3 +57,12 @@ database.start:
 
 database.stop:
 	docker compose stop database
+
+prisma.generate:
+	cd backend && npm run prisma:generate
+
+prisma.migrate:
+	cd backend && npm run prisma:migrate
+
+prisma.seed:
+	cd backend && npm run prisma:seed
