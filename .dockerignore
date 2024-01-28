@@ -10,3 +10,5 @@ temp?
 
 # MD
 *.md
+
+node_modules
