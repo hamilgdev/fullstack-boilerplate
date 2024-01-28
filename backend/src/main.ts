@@ -3,14 +3,14 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
-import { EnvConfig } from '@/src/config/env.config';
+import { EnvConfig, corsConfig } from '@/src/config';
 import { SWAGGER_INFO } from '@/src/common';
 
 const GLOBAL_PREFIX = 'api';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors(corsConfig);
   app.setGlobalPrefix(GLOBAL_PREFIX);
   app.useGlobalPipes(
     new ValidationPipe({
