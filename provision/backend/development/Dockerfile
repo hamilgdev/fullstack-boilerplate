@@ -8,13 +8,13 @@ ENV APP_HOME /var/www/stack
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
-# Copiar el directorio y su contenido
+# Copy the directory and its content
 COPY . .
 COPY package.json tsconfig.json tsconfig.build.json ./
-RUN npm install -g npm@10.4.0
+RUN npm install -g npm@10.8.1
 RUN npm install
 
-# Dar permiso para ejecutar la applicación
+# Allows to execute the application
 RUN adduser --disabled-password nestjs
 RUN chown -R nestjs:nestjs $APP_HOME
 USER nestjs
