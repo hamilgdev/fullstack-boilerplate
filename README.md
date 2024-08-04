@@ -1,6 +1,6 @@
 # Fullstack Boilerplate
 
-A boilerplate for fullstack applications with **NextJS**, **NestJS** and, **PostgreSQL**.
+A boilerplate for full-stack applications with **NextJS**, **NestJS** and, **PostgreSQL**.
 
 ## 📜 System Requirement
 
@@ -12,7 +12,7 @@ A boilerplate for fullstack applications with **NextJS**, **NestJS** and, **Post
 
 ### Visual Studio Code
 
-Extensions aditionals
+Additional extensions
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint): It helps you see the alerts from the linter in real-time in your editor.
 
@@ -25,14 +25,14 @@ You can use the `.env.template` file to create your `.env` file. This file is us
 - `frontend/`: Source code base. Frontend made with **NextJS**
 - `backend/`: Source code base. Backend made with **NestJS**
 - `provision/`: The files to provision the Docker containers
-- `Makefile`: The file to run the commands to initialize, execute and more the application
+- `Makefile`: The file to run the commands to initialize, execute, and more the application
 
 ## 🛠️ Setting implementation
 
 1. Create a new repository using this template
-2. (optional) Rename the `image`, `container_name` and `networks` in the `docker-compose.yml` file according to your project
+2. (optional) Rename the `image`, `container_name`, and `networks` in the `docker-compose.yml` file according to your project
    - Make sure that the new name matches with the **Makefile** instructions in the root `/` of the project
-3. (optional) Rename the `name` in the `package.json` of the **frontend** and **backend** file according to your project
+3. (optional) Rename the `name` in the `package.json` of the **frontend** and **backend** files according to your project
 4. Determine the **environment variables** in the `.env` file. According to the `.env.template` initial file defined in the root `/` of the project
 5. Using the **Makefile** of the root `/` of the project, run the following command to initialize installing the dependencies of **frontend** and **backend** the application:
 
@@ -50,7 +50,7 @@ Build the containers. Go to the next section [🐳 Running the app inside contai
 
 ## 🐳 Running the app inside containers
 
-To run the application with containers you will need:
+To run the application with containers you will need the following:
 
 - Docker. [👉 Install Docker](https://docs.docker.com/get-docker/)
 - Docker Compose. [👉 Install Docker Compose](https://docs.docker.com/compose/install/)
@@ -81,7 +81,7 @@ Or you can run the **backend** container with one command
   make backend.start_dev
 ```
 
-Also you can run the **database** container with one command
+Also, you can run the **database** container with one command
 
 ```bash
   make database.start_dev
@@ -89,7 +89,7 @@ Also you can run the **database** container with one command
 
 ## 🚀 Running the implementation
 
-When the application is running, usging the default configuration
+When the application is running, it uses the default setting
 
 you can access the **frontend** in the following url:
 
