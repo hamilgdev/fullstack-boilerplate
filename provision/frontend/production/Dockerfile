@@ -8,8 +8,6 @@ ENV APP_HOME /app
 WORKDIR $APP_HOME
 
 COPY package.json package-lock.json ./
-# install dependencies
-RUN npm ci
 COPY . .
 # build
 RUN npm run build

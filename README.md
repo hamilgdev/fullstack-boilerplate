@@ -55,7 +55,7 @@ To run the application with containers you will need the following:
 - Docker. [👉 Install Docker](https://docs.docker.com/get-docker/)
 - Docker Compose. [👉 Install Docker Compose](https://docs.docker.com/compose/install/)
 
-then run the following command int the root `/` to initialize the application:
+then run the following command in the root `/` to initialize the application:
 
 Build the containers
 

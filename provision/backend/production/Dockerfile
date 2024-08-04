@@ -32,5 +32,5 @@ COPY . .
 # Copy the bundled code
 COPY --from=base $APP_HOME/dist ./dist
 
-CMD [ "node", "dist/src/main.js" ]
+CMD [ "node", "dist/main.js" ]
 
