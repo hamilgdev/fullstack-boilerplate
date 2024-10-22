@@ -1,30 +1,38 @@
+ARG NODE_VERSION=20.18.0
 
-ARG NODE_VERSION=20.10.0
+# 1:(layer) - install dependencies
+FROM node:${NODE_VERSION}-alpine AS compile-dependencies
 
-FROM node:${NODE_VERSION}-alpine AS build-image
-
-# Set working directory
-ENV APP_HOME /app
+ENV APP_HOME=/app
 WORKDIR $APP_HOME
 
-COPY package.json package-lock.json ./
+COPY package*.json ./
+RUN npm install
+
+# 2:(layer) - build app
+FROM node:${NODE_VERSION}-alpine AS build-application
+
+ENV APP_HOME=/app
+WORKDIR $APP_HOME
+
+COPY --from=compile-dependencies $APP_HOME/node_modules ./node_modules
 COPY . .
-# build
+
 RUN npm run build
-# remove dev dependencies
 RUN npm prune --production
 
-FROM node:${NODE_VERSION}-alpine 
+# 3:(layer) - production image
+FROM node:${NODE_VERSION}-alpine AS production-image
 
-ENV APP_HOME /app
+ENV APP_HOME=/app
 WORKDIR $APP_HOME
-# update npm
-RUN npm install -g npm@10.8.1
-# copy from build image
-COPY --from=build-image $APP_HOME/package.json ./package.json
-COPY --from=build-image $APP_HOME/node_modules ./node_modules
-COPY --from=build-image $APP_HOME/.next ./.next
-COPY --from=build-image $APP_HOME/public ./public
+
+COPY --from=build-application $APP_HOME/package.json ./package.json
+COPY --from=build-application $APP_HOME/node_modules ./node_modules
+COPY --from=build-application $APP_HOME/.next ./.next
+COPY --from=build-application $APP_HOME/public ./public
+
+USER node
 
 EXPOSE 3000
 

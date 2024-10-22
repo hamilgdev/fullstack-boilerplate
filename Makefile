@@ -55,6 +55,10 @@ frontend.stop_dev:
 frontend.build_prod:
 	docker compose -f docker-compose.prod.yml build --no-cache frontend
 
+frontend.docker.build_prod:
+	docker build -t stack-nextjs-prod-image \
+	-f ./provision/frontend/production/Dockerfile ./frontend
+
 frontend.start_prod:
 	docker compose -f docker-compose.prod.yml run \
 	--rm --name host-stack-prod-frontend \
