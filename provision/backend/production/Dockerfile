@@ -1,36 +1,41 @@
-ARG NODE_VERSION=20.10.0
+ARG NODE_VERSION=20.18.0
 
-FROM node:${NODE_VERSION}-alpine AS base
+# 1:(layer) - install dependencies
+FROM node:${NODE_VERSION}-alpine AS compile-dependencies
 
-# Set working directory
-ENV APP_HOME /usr/src/app
+ENV APP_HOME=/usr/src/app
 WORKDIR $APP_HOME
 
 COPY package*.json ./
 RUN npm install
 
-# Bundle app source
-COPY . .
-# build
-RUN npm run build
+# 2:(layer) - build app
+FROM node:${NODE_VERSION}-alpine AS build-application
 
-# Base image for production
-FROM node:${NODE_VERSION}-alpine AS production
-
-# Set working directory
-ENV APP_HOME /usr/src/app
+ENV APP_HOME=/usr/src/app
 WORKDIR $APP_HOME
 
-RUN npm install -g npm@10.8.1
-COPY package*.json ./
+COPY --from=compile-dependencies $APP_HOME/node_modules ./node_modules
+COPY . .
+
+RUN npm run build
+
 # Install production dependencies.
 RUN npm ci --only=production && npm cache clean --force
 
-# Bundle app source
-COPY . .
+# 3:(layer) - production image
+FROM node:${NODE_VERSION}-alpine AS production-image
 
-# Copy the bundled code
-COPY --from=base $APP_HOME/dist ./dist
+ENV APP_HOME=/usr/src/app
+WORKDIR $APP_HOME
 
-CMD [ "node", "dist/main.js" ]
+COPY --from=build-application $APP_HOME/node_modules ./node_modules
+COPY --from=build-application $APP_HOME/dist ./dist
 
+ENV NODE_ENV=production
+
+USER node
+
+EXPOSE 3000
+
+CMD [ "node", "dist/src/main.js" ]

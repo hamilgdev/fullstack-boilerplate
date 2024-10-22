@@ -3,7 +3,6 @@
 */*/temp*
 temp?
 
-
 # Tests
 */coverage
 */.nyc_output
@@ -11,4 +10,6 @@ temp?
 # MD
 *.md
 
-node_modules
+dist/
+node_modules/
+.vscode/

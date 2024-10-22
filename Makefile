@@ -100,6 +100,10 @@ backend.stop_dev:
 backend.build_prod:
 	docker compose -f docker-compose.prod.yml build --no-cache backend
 
+backend.docker.build_prod:
+	docker build -t stack-nestjs-prod-image \
+	-f ./provision/backend/production/Dockerfile ./backend
+
 backend.start_prod:
 	docker compose -f docker-compose.prod.yml run \
 	--rm --name host-stack-prod-backend \
