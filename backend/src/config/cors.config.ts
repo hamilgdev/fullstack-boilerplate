@@ -1,9 +1,9 @@
-import { EnvConfig } from './env.config';
+import { envs } from './env.config';
 
 let allowedOrigins: (RegExp | string)[] = [/localhost:\d{4}$/];
 
-if (EnvConfig().cors_origin)
-  allowedOrigins = allowedOrigins.concat(EnvConfig().cors_origin.split(','));
+if (envs.CORS_ORIGINS)
+  allowedOrigins = allowedOrigins.concat(envs.CORS_ORIGINS.split(','));
 
 export const corsConfig = {
   origin: allowedOrigins,

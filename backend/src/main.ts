@@ -3,7 +3,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
-import { EnvConfig, corsConfig } from '@/src/config';
+import { envs, corsConfig } from '@/src/config';
 import { SWAGGER_INFO } from '@/src/common';
 
 const GLOBAL_PREFIX = 'api';
@@ -30,7 +30,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup(GLOBAL_PREFIX, app, document);
 
-  await app.listen(EnvConfig().port);
+  await app.listen(envs.NEST_PORT);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
